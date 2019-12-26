@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="storeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Debitors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name_debitors" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Telefon" Type="nchar" MaxLength="13" />
+          <Property Name="Sum_debit" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="Sum_credit" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'store.dbo.Groupes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Groupes">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Name_of_Groupe" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name_of_Groupe" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'store.dbo.Products' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id_of_Groupe" />
+            <PropertyRef Name="Id_of_Products" />
+            <PropertyRef Name="Name_of_Products" />
+            <PropertyRef Name="Unit_of_Products" />
+            <PropertyRef Name="Holesale_Price" />
+            <PropertyRef Name="Sale_Price" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_of_Groupe" Type="int" Nullable="false" />
+          <Property Name="Id_of_Products" Type="int" Nullable="false" />
+          <Property Name="Name_of_Products" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Unit_of_Products" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Holesale_Price" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="Sale_Price" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="Quantity_of_Residual" Type="decimal" Precision="9" Scale="3" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'store.dbo.Suppliers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Name_Suppliers" />
+            <PropertyRef Name="TAX_ID_Suppliers" />
+            <PropertyRef Name="Sum_Debit" />
+            <PropertyRef Name="Sum_Credit" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name_Suppliers" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TAX_ID_Suppliers" Type="bigint" Nullable="false" />
+          <Property Name="Name_Responsible_Person" Type="nvarchar" MaxLength="40" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="13" />
+          <Property Name="Sum_Debit" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Sum_Credit" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <EntityContainer Name="storeModelStoreContainer">
+          <EntitySet Name="Debitors" EntityType="Self.Debitors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groupes" EntityType="Self.Groupes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Groupes].[id] AS [id], 
+    [Groupes].[Name_of_Groupe] AS [Name_of_Groupe]
+    FROM [dbo].[Groupes] AS [Groupes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Products" EntityType="Self.Products" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Products].[ID] AS [ID], 
+    [Products].[Id_of_Groupe] AS [Id_of_Groupe], 
+    [Products].[Id_of_Products] AS [Id_of_Products], 
+    [Products].[Name_of_Products] AS [Name_of_Products], 
+    [Products].[Unit_of_Products] AS [Unit_of_Products], 
+    [Products].[Holesale_Price] AS [Holesale_Price], 
+    [Products].[Sale_Price] AS [Sale_Price], 
+    [Products].[Quantity_of_Residual] AS [Quantity_of_Residual], 
+    [Products].[date] AS [date]
+    FROM [dbo].[Products] AS [Products]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Suppliers].[id] AS [id], 
+    [Suppliers].[Name_Suppliers] AS [Name_Suppliers], 
+    [Suppliers].[TAX_ID_Suppliers] AS [TAX_ID_Suppliers], 
+    [Suppliers].[Name_Responsible_Person] AS [Name_Responsible_Person], 
+    [Suppliers].[Telefon] AS [Telefon], 
+    [Suppliers].[Sum_Debit] AS [Sum_Debit], 
+    [Suppliers].[Sum_Credit] AS [Sum_Credit], 
+    [Suppliers].[date] AS [date]
+    FROM [dbo].[Suppliers] AS [Suppliers]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="storeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Debitor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name_debitors" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="Sum_debit" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="Sum_credit" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Groupe">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Name_of_Groupe" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name_of_Groupe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id_of_Groupe" />
+            <PropertyRef Name="Id_of_Products" />
+            <PropertyRef Name="Name_of_Products" />
+            <PropertyRef Name="Unit_of_Products" />
+            <PropertyRef Name="Holesale_Price" />
+            <PropertyRef Name="Sale_Price" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_of_Groupe" Type="Int32" Nullable="false" />
+          <Property Name="Id_of_Products" Type="Int32" Nullable="false" />
+          <Property Name="Name_of_Products" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Unit_of_Products" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Holesale_Price" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="Sale_Price" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="Quantity_of_Residual" Type="Decimal" Precision="9" Scale="3" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Name_Suppliers" />
+            <PropertyRef Name="TAX_ID_Suppliers" />
+            <PropertyRef Name="Sum_Debit" />
+            <PropertyRef Name="Sum_Credit" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name_Suppliers" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TAX_ID_Suppliers" Type="Int64" Nullable="false" />
+          <Property Name="Name_Responsible_Person" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="Sum_Debit" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Sum_Credit" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="storeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Debitors" EntityType="Self.Debitor" />
+          <EntitySet Name="Groupes" EntityType="Self.Groupe" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="storeModelStoreContainer" CdmEntityContainer="storeEntities">
+          <EntitySetMapping Name="Debitors">
+            <EntityTypeMapping TypeName="storeModel.Debitor">
+              <MappingFragment StoreEntitySet="Debitors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_debitors" ColumnName="Name_debitors" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Sum_debit" ColumnName="Sum_debit" />
+                <ScalarProperty Name="Sum_credit" ColumnName="Sum_credit" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groupes">
+            <EntityTypeMapping TypeName="storeModel.Groupe">
+              <MappingFragment StoreEntitySet="Groupes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name_of_Groupe" ColumnName="Name_of_Groupe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="storeModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Id_of_Groupe" ColumnName="Id_of_Groupe" />
+                <ScalarProperty Name="Id_of_Products" ColumnName="Id_of_Products" />
+                <ScalarProperty Name="Name_of_Products" ColumnName="Name_of_Products" />
+                <ScalarProperty Name="Unit_of_Products" ColumnName="Unit_of_Products" />
+                <ScalarProperty Name="Holesale_Price" ColumnName="Holesale_Price" />
+                <ScalarProperty Name="Sale_Price" ColumnName="Sale_Price" />
+                <ScalarProperty Name="Quantity_of_Residual" ColumnName="Quantity_of_Residual" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="storeModel.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name_Suppliers" ColumnName="Name_Suppliers" />
+                <ScalarProperty Name="TAX_ID_Suppliers" ColumnName="TAX_ID_Suppliers" />
+                <ScalarProperty Name="Name_Responsible_Person" ColumnName="Name_Responsible_Person" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Sum_Debit" ColumnName="Sum_Debit" />
+                <ScalarProperty Name="Sum_Credit" ColumnName="Sum_Credit" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
